@@ -17,8 +17,8 @@ function App() {
 
   const getUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:8800");
-      setUsers(res.data.sort((a, b) => (a.nome > b.nome ? 1 : -1)));
+      const res = await axios.get("http://localhost:8800/users/allUsers");
+      setUsers(res.data.sort((a, b) => (a.name > b.name ? 1 : -1)));
     } catch (error) {
       toast.error(error);
     }
@@ -35,7 +35,7 @@ function App() {
         <Form onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers} />
         <Grid setOnEdit={setOnEdit} users={users} setUsers={setUsers} />
       </Container>
-      <ToastContainer autoClose={3000} position={toast?.POSITION?.BOTTOM_LEFT} />
+      <ToastContainer autoClose={1000} position={toast?.POSITION?.BOTTOM_LEFT} />
       <GlobalStyle />
     </>
   );
