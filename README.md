@@ -1,4 +1,4 @@
-# User Management Backend
+# User Management
 
 This is a simple user management backend application that performs CRUD (Create, Read, Update, Delete) operations on user data. The project is built using **Node.js**, **Express**, and **PostgreSQL**. It follows a clean architecture with a separation of concerns between **Routes**, **Controllers**, and **Repositories**.
 
