@@ -1,7 +1,7 @@
-import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { toast } from "react-toastify";
+import { createUser, updateUser } from "../services/userService";
 
 const FormContainer = styled.form`
   display: flex;
@@ -68,25 +68,21 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
     }
 
     if (onEdit) {
-      await axios
-        .put("http://localhost:8800/users/" + onEdit.id, {
-          name: user.name.value,
-          email: user.email.value,
-          phone: user.phone.value,
-          date_of_birth: user.date_of_birth.value,
-        })
-        .then(({ data }) => toast.success(data))
-        .catch(({ data }) => toast.error(data));
+      const { data } = await updateUser(onEdit.id, {
+        name: user.name.value,
+        email: user.email.value,
+        phone: user.phone.value,
+        date_of_birth: user.date_of_birth.value,
+      });
+      toast.success(data);
     } else {
-      await axios
-        .post("http://localhost:8800/users/", {
-          name: user.name.value,
-          email: user.email.value,
-          phone: user.phone.value,
-          date_of_birth: user.date_of_birth.value,
-        })
-        .then(({ data }) => toast.success(data))
-        .catch(({ data }) => toast.error(data));
+      const { data } = await createUser({
+        name: user.name.value,
+        email: user.email.value,
+        phone: user.phone.value,
+        date_of_birth: user.date_of_birth.value,
+      });
+      toast.success(data);
     }
 
     user.name.value = "";
