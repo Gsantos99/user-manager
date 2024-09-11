@@ -1,7 +1,7 @@
 // React
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
+import { getAllUsers } from "./services/userService.js";
 
 // Styles
 import GlobalStyle from "./styles/global";
@@ -18,16 +18,16 @@ function App() {
 
   const getUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:8800/users/allUsers");
+      const res = await getAllUsers();
       setUsers(res.data.sort((a, b) => (a.name > b.name ? 1 : -1)));
     } catch (error) {
-      toast.error(error);
+      toast.error(error.response?.data || "Error fetching users");
     }
   };
 
   useEffect(() => {
     getUsers();
-  }, [setUsers]);
+  }, []);
 
   return (
     <>
