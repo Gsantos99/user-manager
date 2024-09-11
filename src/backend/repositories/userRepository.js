@@ -19,7 +19,7 @@ export const getUserById = async (id) => {
 };
 
 export const updateUser = async (id, name, email, phone, date_of_birth) => {
-  await pool.query("UPDATE users SET name = $1, email = $2, phone = $3, date_of_birth = $4 WHERE id = $3", [
+  await pool.query("UPDATE users SET name = $1, email = $2, phone = $3, date_of_birth = $4 WHERE id = $5", [
     name,
     email,
     phone,
