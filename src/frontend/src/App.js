@@ -1,7 +1,8 @@
 // React
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from 'react-toastify';
+
 // Styles
 import GlobalStyle from "./styles/global";
 import "react-toastify/dist/ReactToastify.css";
@@ -35,7 +36,7 @@ function App() {
         <Form onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers} />
         <Grid setOnEdit={setOnEdit} users={users} setUsers={setUsers} />
       </Container>
-      <ToastContainer autoClose={1000} position={toast?.POSITION?.BOTTOM_LEFT} />
+      <ToastContainer autoClose={3000} />
       <GlobalStyle />
     </>
   );
