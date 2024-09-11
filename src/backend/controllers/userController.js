@@ -13,7 +13,7 @@ export const createUser = async (req, res) => {
   const { name, email, phone, date_of_birth } = req.body;
   try {
     const newUser = await userRepository.createUser(name, email,phone, date_of_birth);
-    res.json(newUser);
+    res.status(200).json("Usuário Criado com Sucesso!");
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
