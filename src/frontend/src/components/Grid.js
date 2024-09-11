@@ -3,6 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { deleteUser } from "../services/userService";
 
 const Table = styled.table`
   width: 100%;
@@ -47,15 +48,14 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
   };
 
   const handleDelete = async (id) => {
-    await axios
-      .delete("http://localhost:8800/users/" + id)
-      .then(({ data }) => {
-        const newArray = users.filter((user) => user.id !== id);
-
-        setUsers(newArray);
-        toast.success(data);
-      })
-      .catch(({ data }) => toast.error(data));
+    try {
+      await deleteUser(id);
+      const newUsers = users.filter((item) => item.id !== id);
+      setUsers(newUsers);
+      toast.success("Usuário deletado com sucesso!");
+    } catch (error) {
+      toast.error("Erro ao deletar usuário!");
+    }
 
     setOnEdit(null);
   };
