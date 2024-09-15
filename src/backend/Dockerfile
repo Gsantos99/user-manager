@@ -1,12 +1,12 @@
-FROM node:alpine
+FROM node:latest
 
-WORKDIR /usr/app
-
-COPY package*.json ./
-RUN npm install 
+WORKDIR /app
 
 COPY . .
 
-EXPOSE 8800
+RUN rm -rf node_modules
+RUN npm install
 
-CMD ["npm", "run"]
+CMD ["npm", "start"]
+
+EXPOSE 8800
